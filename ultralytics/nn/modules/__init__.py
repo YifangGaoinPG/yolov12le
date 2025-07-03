@@ -17,7 +17,7 @@ Example:
     ```
 """
 
-from ultralytics.nn.modules.local_attn_block import LocalAttnBlock, ESHABlock
+from ultralytics.nn.modules.local_attn_block import LocalAttnBlock, ESHABlock, Add
 
 from .block import (
     C1,
@@ -165,5 +165,6 @@ __all__ = (
     "Index",
     "A2C2f",
     "LocalAttnBlock", 
-    "ESHABlock"
+    "ESHABlock",
+    "Add"
 )

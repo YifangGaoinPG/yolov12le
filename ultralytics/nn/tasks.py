@@ -11,7 +11,7 @@ import thop
 import torch
 import torch.nn as nn
 
-from ultralytics.nn.modules.local_attn_block import LocalAttnBlock, ESHABlock
+from ultralytics.nn.modules.local_attn_block import LocalAttnBlock, ESHABlock, Add
 
 from ultralytics.nn.modules import (
     AIFI,

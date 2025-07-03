@@ -36,4 +36,11 @@ class ParallelFusionBlock(nn.Module):
         out2 = self.esha(x)
         fused = torch.cat([out1, out2], dim=1)  # concat on channel dim
         return self.concat(fused)
+    
+class Add(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+    def forward(self, x, y):
+        return x + y
 
