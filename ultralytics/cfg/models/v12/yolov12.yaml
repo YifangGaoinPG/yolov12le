@@ -48,6 +48,6 @@ head:
   - [-2, 1, ESHABlock, [1024]]          # 分支2（注意 from=-2 指的是上一步）
   - [[-1, -2], 1, Concat, [1]]          # 拼接融合
   - [-1, 1, Conv, [1024, 1, 1]]         # 通道压缩
-  - [[-1, -5], 1, Add, []]              # Residual connection
+  - [-1, 1, Add, [-5]]             # Residual connection
 
   - [[14, 17, 20], 1, Detect, [nc]] # Detect(P3, P4, P5)
