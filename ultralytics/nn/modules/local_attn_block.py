@@ -41,6 +41,6 @@ class Add(nn.Module):
     def __init__(self):
         super().__init__()
 
-    def forward(self, x, y):
-        return x + y
+    def forward(self, x):
+        return x[0] + x[1]  
 
