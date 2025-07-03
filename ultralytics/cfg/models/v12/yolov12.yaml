@@ -47,7 +47,7 @@ head:
   - [-1, 1, LocalAttnBlock, [1024]]
   - [-2, 1, ESHABlock, [1024]]
   - [-1, 1, Add, [-2]]
-  - [-1, 1, Add, [-6]]  # residual to P5 input
+  #- [-1, 1, Add, [-6]]  # residual to P5 input
 
 
 
