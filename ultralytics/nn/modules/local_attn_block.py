@@ -38,10 +38,10 @@ class ParallelFusionBlock(nn.Module):
         return self.concat(fused)
     
 class Add(nn.Module):
-    def __init__(self):
+    def __init__(self, from_idx):
         super().__init__()
+        self.from_idx = from_idx  # 例如 -5
 
-    def forward(self, x):
-        if isinstance(x, (list, tuple)):
-            return x[0] + x[1]
-        return x
+    def forward(self, x, previous_outputs=None):
+               
+        return x + previous_outputs[self.from_idx]
