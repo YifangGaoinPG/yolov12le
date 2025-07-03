@@ -42,5 +42,6 @@ class Add(nn.Module):
         super().__init__()
 
     def forward(self, x):
-        return x[0] + x[1]  
-
+        if isinstance(x, (list, tuple)):
+            return x[0] + x[1]
+        return x
