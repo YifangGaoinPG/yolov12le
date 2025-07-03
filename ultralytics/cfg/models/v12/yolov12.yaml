@@ -43,11 +43,10 @@ head:
 
   - [-1, 1, Conv, [512, 3, 2]]
   - [[-1, 8], 1, Concat, [1]] # cat head P5
-  #- [-1, 2, C3k2, [1024, True]] # 20 (P5/32-large)
   - [-1, 1, LocalAttnBlock, [1024]]
   - [-2, 1, ESHABlock, [1024]]
-  - [-1, 1, Add, [-2]]
-  #- [-1, 1, Add, [-6]]  # residual to P5 input
+  - [[-1, -2], 1, Concat, [1]]            # 拼接后通道为 2048
+  - [-1, 1, Conv, [1024, 1, 1]] 
 
 
 
