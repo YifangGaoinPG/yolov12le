@@ -38,10 +38,11 @@ class ParallelFusionBlock(nn.Module):
         return self.concat(fused)
     
 class Add(nn.Module):
-    def __init__(self, from_idx):
+    def __init__(self, from_idx):  # 注意：不是 from_，是传入 residual offset
         super().__init__()
-        self.from_idx = from_idx  # 例如 -5
+        self.from_idx = from_idx  # e.g., -5
 
     def forward(self, x, previous_outputs=None):
-               
+        assert previous_outputs is not None, "Ultralytics should pass previous_outputs"
         return x + previous_outputs[self.from_idx]
+
