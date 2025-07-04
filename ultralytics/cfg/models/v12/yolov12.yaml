@@ -43,13 +43,12 @@ head:
 
   - [-1, 1, Conv, [512, 3, 2]]
   - [[-1, 8], 1, Concat, [1]] # cat head P5
-  - [-1, 1, Conv, [512, 1, 1]]                    # 20: 压缩为 1024
-  - [-1, 1, LocalAttnBlock, [512]]               # 21: Changed from 1024 to 512
-  - [-2, 1, ESHABlock, [512]]                    # 22: Changed from 1024 to 512
-  - [[-1, -2], 1, Concat, [1]]                   # 23 → 1024 channels (512 + 512)
-  - [-1, 1, Conv, [1024, 1, 1]]                  # 24
-  - [[14, 17, 24], 1, Detect, [nc]] # Detect(P3, P4, P5)
-
+  - [-1, 1, Conv, [512, 1, 1]]              # 20
+  - [-1, 1, LocalAttnBlock, [512]]         # 21
+  - [-2, 1, ESHABlock, [512]]              # 22
+  - [[-1, -2], 1, Concat, [1]]             # 23
+  - [-1, 1, Conv, [512, 1, 1]]             # 24
+  - [[14, 17, 24], 1, Detect, [nc]]  
 
 
  # - [[14, 17, 20], 1, Detect, [nc]] # Detect(P3, P4, P5)
