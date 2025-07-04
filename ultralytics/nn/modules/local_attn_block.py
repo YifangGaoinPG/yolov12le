@@ -1,48 +1,54 @@
-# local_attn_block.py
-import torch
-import torch.nn as nn
+# YOLOv12 🚀, AGPL-3.0 license
+# YOLOv12 object detection model with P3-P5 outputs. For Usage examples see https://docs.ultralytics.com/tasks/detect
+# CFG file for YOLOv12-turbo
 
-class LocalAttnBlock(nn.Module):
-    def __init__(self, c):
-        super().__init__()
-        self.conv1 = nn.Conv2d(c, c, kernel_size=1)
-        self.conv2 = nn.Conv2d(c, c, kernel_size=3, padding=1, groups=c)  # DW conv
-        self.act = nn.SiLU()
+# Parameters
+nc: 80 # number of classes
+scales: # model compound scaling constants, i.e. 'model=yolov12n.yaml' will call yolov12.yaml with scale 'n'
+  # [depth, width, max_channels]
+  n: [0.50, 0.25, 1024] # summary: 497 layers, 2,553,904 parameters, 2,553,888 gradients, 6.2 GFLOPs
+  s: [0.50, 0.50, 1024] # summary: 497 layers, 9,127,424 parameters, 9,127,408 gradients, 19.7 GFLOPs
+  m: [0.50, 1.00, 512] # summary: 533 layers, 19,670,784 parameters, 19,670,768 gradients, 60.4 GFLOPs
+  l: [1.00, 1.00, 512] # summary: 895 layers, 26,506,496 parameters, 26,506,480 gradients, 83.3 GFLOPs
+  x: [1.00, 1.50, 512] # summary: 895 layers, 59,414,176 parameters, 59,414,160 gradients, 185.9 GFLOPs
+  z: [0.50, 0.50, 1024] # summary:  layers,  parameters,  gradients,  GFLOPs
 
-    def forward(self, x):
-        return x + self.act(self.conv1(x) + self.conv2(x))
 
-class ESHABlock(nn.Module):
-    def __init__(self, c):
-        super().__init__()
-        self.fc1 = nn.Conv2d(c, c // 4, 1)
-        self.fc2 = nn.Conv2d(c // 4, c, 1)
-        self.pool = nn.AdaptiveAvgPool2d(1)
-        self.sigmoid = nn.Sigmoid()
+# YOLO12-turbo backbone
+backbone:
+  # [from, repeats, module, args]
+  - [-1, 1, Conv,  [64, 3, 2]] # 0-P1/2
+  - [-1, 1, Conv,  [128, 3, 2, 1, 2]] # 1-P2/4
+  - [-1, 2, C3k2,  [256, False, 0.25]]
+  - [-1, 1, Conv,  [256, 3, 2, 1, 4]] # 3-P3/8
+  - [-1, 2, C3k2,  [512, False, 0.25]]
+  - [-1, 1, Conv,  [512, 3, 2]] # 5-P4/16
+  - [-1, 4, A2C2f, [512, True, 4]]
+  - [-1, 1, Conv,  [1024, 3, 2]] # 7-P5/32
+  - [-1, 4, A2C2f, [1024, True, 1]] # 8
 
-    def forward(self, x):
-        w = self.sigmoid(self.fc2(nn.SiLU()(self.fc1(self.pool(x)))))
-        return x * w
-    
-class ParallelFusionBlock(nn.Module):
-    def __init__(self, c):
-        super().__init__()
-        self.local = LocalAttnBlock(c)
-        self.esha = ESHABlock(c)
-        self.concat = nn.Conv2d(c * 2, c, kernel_size=1)  # optional channel fusion
+# YOLO12-turbo head
+head:
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 6], 1, Concat, [1]] # cat backbone P4
+  - [-1, 2, A2C2f, [512, False, -1]] # 11
 
-    def forward(self, x):
-        out1 = self.local(x)
-        out2 = self.esha(x)
-        fused = torch.cat([out1, out2], dim=1)  # concat on channel dim
-        return self.concat(fused)
-    
-class Add(nn.Module):
-    def __init__(self, from_idx):  # 注意：不是 from_，是传入 residual offset
-        super().__init__()
-        self.from_idx = from_idx  # e.g., -5
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 4], 1, Concat, [1]] # cat backbone P3
+  - [-1, 2, A2C2f, [256, False, -1]] # 14
 
-    def forward(self, x, previous_outputs=None):
-        assert previous_outputs is not None, "Ultralytics should pass previous_outputs"
-        return x + previous_outputs[self.from_idx]
+  - [-1, 1, Conv, [256, 3, 2]]
+  - [[-1, 11], 1, Concat, [1]] # cat head P4
+  - [-1, 2, A2C2f, [512, False, -1]] # 17
 
+  - [-1, 1, Conv, [512, 3, 2]]
+  - [[-1, 8], 1, Concat, [1]] # cat head P5
+  - [-1, 2, C3k2, [1024, True]] # 20 (P5/32-large)
+
+
+  - [-1, 1, Conv, [128, 1, 1]]
+  - [-1, 1, LocalAttnBlock, [128]]
+  - [-2, 1, ESHABlock, [128]]
+  - [[-1, -2], 1, Concat, [1]]      
+  - [-1, 1, Conv, [128, 1, 1]]
+  - [[14, 17, 25], 1, Detect, [nc]]
