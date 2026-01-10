@@ -25,9 +25,9 @@ Input features are projected, processed in parallel, concatenated, and fused wit
 ### Detection Head Comparison (Figure 1 in the paper)
 
 <div align="center">
-  <img src="C3K2.drawio.pdf" width="32%" alt="C3K2">
-  <img src="R-ELAN.drawio.pdf" width="32%" alt="R-ELAN">
-  <img src="LCA.drawio.pdf" width="32%" alt="PLCA-Head">
+  <img src="figures/C3K2.drawio.png" width="32%" alt="C3K2">
+  <img src="figures/R-ELAN.drawio.png" width="32%" alt="R-ELAN">
+  <img src="figures/LCA.drawio.png" width="32%" alt="PLCA-Head">
 </div>
 
 *Figure 1: Comparison of three detection head refinement structures: (a) C3K2 featuring multi-path convolution, (b) R-ELAN utilizing residual layer aggregation, and (c) our proposed PLCA-Head employing parallel spatial and channel-wise attention.*
@@ -35,8 +35,8 @@ Input features are projected, processed in parallel, concatenated, and fused wit
 ### PLCA-Head Submodules (Figure 2 in the paper)
 
 <div align="center">
-  <img src="LocalAttnBlock.drawio.pdf" width="45%" alt="LocalAttnBlock">
-  <img src="ESHABlock.drawio.pdf" width="45%" alt="ESHABlock">
+  <img src="figures/LocalAttnBlock.drawio.png" width="45%" alt="LocalAttnBlock">
+  <img src="figures/ESHABlock.drawio.png" width="45%" alt="ESHABlock">
 </div>
 
 *Figure 2: Detailed structure of (a) LocalAttnBlock and (b) ESHABlock.*
