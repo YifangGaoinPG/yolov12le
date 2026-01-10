@@ -12,11 +12,14 @@ Source code and trained models: https://github.com/YifangGaoinPG/yolov12le
 
 ### 1. Installation
 
-```bash
+```
 pip install -q git+https://github.com/YifangGaoinPG/yolov12le.git roboflow supervision flash-attn
+```
 
-### 2. Download CBVD-5 Dataset
+### 2. Dataset
+Use the following code:
 ```python
+
 import pillow_heif
 
 # Mock register_avif_opener for compatibility
@@ -42,8 +45,10 @@ with open(yaml_path, "r") as f:
     lines = f.readlines()
 with open(yaml_path, "w") as f:
     f.writelines(lines[:-4])   # usually remove last 4 lines
+```
 
 ### Training
+```python
 from ultralytics import YOLO
 
 model = YOLO("yolov12s.yaml")  # loads version with PLCA-Head
@@ -64,8 +69,9 @@ results = model.train(
     name="yolov12le_train",
     pretrained=True
 )
-
+```
 ### Validation
+```python
 from ultralytics import YOLO
 
 # Load trained model
@@ -73,6 +79,7 @@ model = YOLO("runs/detect/yolov12le_train/weights/best.pt")
 
 # Validate
 metrics = model.val(data=f"{dataset.location}/data.yaml")
+```
 
 ### Citation
 @article{gao2026enhancing,
