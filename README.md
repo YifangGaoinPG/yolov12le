@@ -27,7 +27,7 @@ Input features are projected, processed in parallel, concatenated, and fused wit
 <div align="center">
   <img src="figures/C3K2.drawio.png" width="32%" alt="C3K2">
   <img src="figures/R-ELAN.drawio.png" width="32%" alt="R-ELAN">
-  <img src="figures/LCA.drawio.png" width="32%" alt="PLCA-Head">
+  <img src="figures/PLCA.drawio.png" width="32%" alt="PLCA-Head">
 </div>
 
 *Figure 1: Comparison of three detection head refinement structures: (a) C3K2 featuring multi-path convolution, (b) R-ELAN utilizing residual layer aggregation, and (c) our proposed PLCA-Head employing parallel spatial and channel-wise attention.*
@@ -44,7 +44,7 @@ Input features are projected, processed in parallel, concatenated, and fused wit
 
 **Training Dynamics**:
 
-![Training Curves](results.png)  
+![Training Curves](figures/results.png)  
 *Figure 5: Training and validation metrics over 521 epochs.*
 
 ## Model Comparison on CBVD-5 Dataset
