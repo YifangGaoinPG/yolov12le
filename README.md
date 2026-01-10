@@ -15,7 +15,7 @@ Source code and trained models: https://github.com/YifangGaoinPG/yolov12le
 ```bash
 pip install -q git+https://github.com/YifangGaoinPG/yolov12le.git roboflow supervision flash-attn
 
-## Download CBVD-5 Dataset
+### Download CBVD-5 Dataset
 import pillow_heif
 
 # Mock register_avif_opener for compatibility
@@ -42,7 +42,7 @@ with open(yaml_path, "r") as f:
 with open(yaml_path, "w") as f:
     f.writelines(lines[:-4])   # usually remove last 4 lines
 
-## Training
+### Training
 from ultralytics import YOLO
 
 model = YOLO("yolov12s.yaml")  # loads version with PLCA-Head
@@ -64,7 +64,7 @@ results = model.train(
     pretrained=True
 )
 
-## Validation
+### Validation
 from ultralytics import YOLO
 
 # Load trained model
@@ -73,7 +73,7 @@ model = YOLO("runs/detect/yolov12le_train/weights/best.pt")
 # Validate
 metrics = model.val(data=f"{dataset.location}/data.yaml")
 
-## Citation
+### Citation
 @article{gao2026enhancing,
   title={Enhancing Fine-Grained Livestock Behavior Detection with Lightweight Parallel Attention in YOLOv12},
   author={Gao, Yifang and Luo, Wei and Zhang, Shunshun and Ahmad, Nur Syazreen and Wang, Xiaojun and Goh, Patrick},
@@ -83,7 +83,7 @@ metrics = model.val(data=f"{dataset.location}/data.yaml")
   % doi = {insert DOI when available}
 }
 
-## Related Projects 🔗
+### Related Projects 🔗
 
 - Based on [Ultralytics](https://github.com/ultralytics/ultralytics)
 - CBVD-5 Dataset paper: https://www.nature.com/articles/s41598-024-52266-1
