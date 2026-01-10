@@ -8,6 +8,39 @@ Official implementation of PLCA-Head (Parallel Local and Channel Attention Head)
 
 Fine-grained livestock behavior recognition remains a key challenge in precision farming, as subtle posture variations and complex barn conditions often hinder the performance of standard YOLO-based detectors. To address these issues, we propose PLCA-Head, a lightweight parallel local and channel attention module integrated into YOLOv12. By combining dynamic local spatial recalibration with global channel-wise modulation in parallel paths, PLCA-Head effectively captures nuanced spatial and semantic features critical for distinguishing behaviors such as rumination. Evaluated on the CBVD-5 benchmark, our approach achieves 97.1% mAP@50, 72.4% mAP@50–95, 93.3% precision, and 94.4% rumination AP, outperforming both YOLOv12s and SlowFastNet across all major metrics. Compared to SlowFastNet, it reduces parameters by ~70%, GFLOPs by ~68.8%, and delivers 10× faster inference, while surpassing YOLOv12s in accuracy with 9.7% fewer convergence epochs and maintaining real-time performance. Source code and trained models: https://github.com/YifangGaoinPG/yolov12le.
 
+**CBVD-5 Dataset Paper**  
+Li, K., Fan, D., Wu, H. & Zhao, A. A new dataset for video-based cow behavior recognition. *Sci Rep* **14**, 18702 (2024). https://doi.org/10.1038/s41598-024-65953-x  
+Dataset available at: https://www.kaggle.com/datasets/fandaoerji/cbvd-5cow-behavior-video-dataset
+
+## Core Algorithm: PLCA-Head
+
+PLCA-Head is a lightweight detection head with **parallel branches**:
+- **LocalAttnBlock**: Dynamic local spatial attention via pointwise + depthwise conv.
+- **ESHABlock**: Global channel attention via squeeze-and-hybrid (bottleneck 1×1 conv).
+
+Input features are projected, processed in parallel, concatenated, and fused with 1×1 conv. Minimal overhead, big gains in fine-grained feature capture.
+
+**Architecture Overview**:
+
+![PLCA-Head Comparison](figures/fig1_comparison.png)  
+*Figure 1: Comparison of detection heads – (a) C3K2, (b) R-ELAN, (c) PLCA-Head (ours).*
+
+![PLCA-Head Submodules](figures/fig2_submodules.png)  
+*Figure 2: Detailed structure of (a) LocalAttnBlock and (b) ESHABlock.*
+
+**Training Dynamics**:
+
+![Training Curves](figures/fig5_training.png)  
+*Figure 5: Training and validation metrics over 521 epochs.*
+
+**Confusion Matrix & Qualitative Results**:
+
+![Confusion Matrix](figures/fig7_confusion.png)  
+*Figure 7: Normalized confusion matrix on CBVD-5.*
+
+![Qualitative Examples](figures/fig8_qualitative.png)  
+*Figure 8: Batch visualizations – detections in challenging conditions.*
+
 ## Model Comparison on CBVD-5 Dataset
 
 Per-behavior and overall performance of different YOLO variants, YOLOv12s, PLCA-Head-enhanced YOLOv12, and SlowFastNet. Results for YOLO-based models are reported as **mean ± standard deviation** over three independent runs (random seeds 0, 42, 1337).
