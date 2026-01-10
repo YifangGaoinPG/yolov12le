@@ -1,9 +1,6 @@
-# YOLOv12le
 
-Enhancing Fine-Grained Livestock Behavior Detection  
-with Lightweight Parallel Attention in YOLOv12
+# Enhancing Fine-Grained Livestock Behavior Detection with Lightweight Parallel Attention in YOLOv12
 
-**Published in The Visual Computer (2026)**
 
 ## Abstract
 
