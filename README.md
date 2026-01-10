@@ -54,7 +54,7 @@ Algorithm 1 outlines the inference process of the proposed PLCA-Head. The module
 2. $X_L \leftarrow \text{LocalAttnBlock}(X_0)$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ▷ Spatial recalibration  
 3. $X_C \leftarrow \text{ESHABlock}(X_0)$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ▷ Channel recalibration  
 4. $X_{\text{fusion}} \leftarrow \text{Concat}(X_L, X_C)$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ▷ Merge branches  
-5: $X_{\text{out}} \leftarrow \text{Conv}_{1 \times 1}(X_{\text{fusion}})$ $\quad \triangleright$ Final fusion
+5. $X_{\text{out}} \leftarrow \text{Conv}_{1\times1}(X_{\text{fusion}})$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ▷ Final fusion
 6. Predict detections using YOLOv12 Detect head  
    **return** Final object predictions
 
