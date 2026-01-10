@@ -4,12 +4,7 @@
 
 ## Abstract
 
-Fine-grained livestock behavior recognition remains a key challenge in precision farming, as subtle posture variations and complex barn conditions often hinder the performance of standard YOLO-based detectors.  
-To address these issues, we propose PLCA-Head, a lightweight parallel local and channel attention module integrated into YOLOv12.  
-By combining dynamic local spatial recalibration with global channel-wise modulation in parallel paths, PLCA-Head effectively captures nuanced spatial and semantic features critical for distinguishing behaviors such as rumination.
-
-Evaluated on the CBVD-5 benchmark, our approach achieves 97.1% mAP@50, 72.4% mAP@50–95, 93.3% precision, and 94.4% rumination AP, outperforming both YOLOv12s and SlowFastNet across all major metrics.  
-Compared to SlowFastNet, it reduces parameters by ~70%, GFLOPs by ~68.8%, and delivers 10× faster inference, while surpassing YOLOv12s in accuracy with 9.7% fewer convergence epochs and maintaining real-time performance.
+Fine-grained livestock behavior recognition remains a key challenge in precision farming, as subtle posture variations and complex barn conditions often hinder the performance of standard YOLO-based detectors. To address these issues, we propose PLCA-Head, a lightweight parallel local and channel attention module integrated into YOLOv12. By combining dynamic local spatial recalibration with global channel-wise modulation in parallel paths, PLCA-Head effectively captures nuanced spatial and semantic features critical for distinguishing behaviors such as rumination. Evaluated on the CBVD-5 benchmark, our approach achieves 97.1% mAP@50, 72.4% mAP@50–95, 93.3% precision, and 94.4% rumination AP, outperforming both YOLOv12s and SlowFastNet across all major metrics. Compared to SlowFastNet, it reduces parameters by ~70%, GFLOPs by ~68.8%, and delivers 10× faster inference, while surpassing YOLOv12s in accuracy with 9.7% fewer convergence epochs and maintaining real-time performance.
 
 Source code and trained models: https://github.com/YifangGaoinPG/yolov12le
 
