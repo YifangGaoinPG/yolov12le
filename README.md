@@ -25,9 +25,9 @@ Input features are projected, processed in parallel, concatenated, and fused wit
 ### Detection Head Comparison (Figure 1 in the paper)
 
 <div align="center">
-  <img src="figures/C3K2.drawio.pdf" width="32%" alt="C3K2">
-  <img src="figures/R-ELAN.drawio.pdf" width="32%" alt="R-ELAN">
-  <img src="figures/PLCA.drawio.pdf" width="32%" alt="PLCA-Head">
+  <img src="C3K2.drawio.pdf" width="32%" alt="C3K2">
+  <img src="R-ELAN.drawio.pdf" width="32%" alt="R-ELAN">
+  <img src="LCA.drawio.pdf" width="32%" alt="PLCA-Head">
 </div>
 
 *Figure 1: Comparison of three detection head refinement structures: (a) C3K2 featuring multi-path convolution, (b) R-ELAN utilizing residual layer aggregation, and (c) our proposed PLCA-Head employing parallel spatial and channel-wise attention.*
@@ -35,8 +35,8 @@ Input features are projected, processed in parallel, concatenated, and fused wit
 ### PLCA-Head Submodules (Figure 2 in the paper)
 
 <div align="center">
-  <img src="figures/LocalAttnBlock.drawio.pdf" width="45%" alt="LocalAttnBlock">
-  <img src="figures/ESHABlock.drawio.pdf" width="45%" alt="ESHABlock">
+  <img src="LocalAttnBlock.drawio.pdf" width="45%" alt="LocalAttnBlock">
+  <img src="ESHABlock.drawio.pdf" width="45%" alt="ESHABlock">
 </div>
 
 *Figure 2: Detailed structure of (a) LocalAttnBlock and (b) ESHABlock.*
@@ -44,16 +44,8 @@ Input features are projected, processed in parallel, concatenated, and fused wit
 
 **Training Dynamics**:
 
-![Training Curves](figures/fig5_training.png)  
+![Training Curves](results.png)  
 *Figure 5: Training and validation metrics over 521 epochs.*
-
-**Confusion Matrix & Qualitative Results**:
-
-![Confusion Matrix](figures/fig7_confusion.png)  
-*Figure 7: Normalized confusion matrix on CBVD-5.*
-
-![Qualitative Examples](figures/fig8_qualitative.png)  
-*Figure 8: Batch visualizations – detections in challenging conditions.*
 
 ## Model Comparison on CBVD-5 Dataset
 
@@ -86,7 +78,9 @@ Per-behavior and overall performance of different YOLO variants, YOLOv12s, PLCA-
 - Much faster and lighter than SlowFastNet 
 - Faster convergence 
 
-For detailed per-behavior AP, confusion matrices, and training curves, refer to the paper.
+For detailed training dynamics, convergence analysis, full curves (including F1, Precision, Recall, PR curves), confusion matrices, qualitative results, and additional visualizations (labels, correlagram, etc.), please refer to the full paper (Sections 4–5 and corresponding figures).
+
+More results and analyses are available in the paper.
 
 ## Quick Start 🚀
 
