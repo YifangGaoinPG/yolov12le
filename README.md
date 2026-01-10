@@ -154,7 +154,7 @@ metrics = model.val(data=f"{dataset.location}/data.yaml")
 ### Related Projects 🔗
 
 - Based on [Ultralytics](https://github.com/ultralytics/ultralytics)
-- CBVD-5 Dataset paper: https://www.nature.com/articles/s41598-024-52266-1
+- CBVD-5 Dataset paper: [https://www.nature.com/articles/s41598-024-52266-1](https://www.nature.com/articles/s41598-024-65953-x)
 
 Thank you for your interest in our work!  
 Any questions → please open an issue on GitHub.
