@@ -202,7 +202,7 @@ metrics = model.val(data=f"{dataset.location}/data.yaml")
 @article{gao2026enhancing,
   title={Enhancing Fine-Grained Livestock Behavior Detection with Lightweight Parallel Attention in YOLOv12},
   author={Gao, Yifang and Luo, Wei and Zhang, Shunshun and Ahmad, Nur Syazreen and Wang, Xiaojun and Goh, Patrick},
-  journal={The Visual Computer},
+  journal={Journal of Supercomputing},
   year={2026},
   publisher={Springer}
   % doi = {insert DOI when available}
